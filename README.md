@@ -42,6 +42,10 @@ This app uses the Provider package for state management.
 * curved_navigation_bar
 
 
+
+https://github.com/divyansiranpariya/Mirror_Wall/assets/154776848/35f97c4d-4562-49e7-b2a0-0da5092a489f
+
+
 ## Screenshorts
 
 ![m1](https://github.com/divyansiranpariya/Mirror_Wall/assets/154776848/7f0a148c-0995-4693-85fd-0ca28315c00c)
@@ -49,4 +53,6 @@ This app uses the Provider package for state management.
 ![m5](https://github.com/divyansiranpariya/Mirror_Wall/assets/154776848/3755c8b6-82fa-4690-8535-ec9ea605b61b)
 ![m3](https://github.com/divyansiranpariya/Mirror_Wall/assets/154776848/5377b0c1-b67e-4291-8893-dd68bb6db899)
 ![m4](https://github.com/divyansiranpariya/Mirror_Wall/assets/154776848/1d7b50b4-e8b2-48e0-b020-ad021cee60d3)
-![fm1](https://github.com/divyansiranpariya/Mirror_Wall/assets/154776848/e29bfe6e-ec7d-4bdb-9207-7b926db86f6e)
+![Screenshot_20240712_013009](https://github.com/divyansiranpariya/Mirror_Wall/assets/154776848/21e81a3d-504a-4013-87dc-10b2c789985a)
+![fm1](https://github.com/divyansiranpariya/Mirror_Wall/assets/154776848/dafeb8ac-39cd-4b3c-8ba8-985f65d24858)
+
