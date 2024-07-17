@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:provider/provider.dart';
 
 import '../../Provider/bottom_provider.dart';
@@ -17,6 +18,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   PageController pageviewcontoller = PageController();
+  InAppWebViewController? inAppWebViewController;
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +37,14 @@ class _HomepageState extends State<Homepage> {
       bottomNavigationBar: Consumer<BottomProvider>(
         builder: (context, bottom, _) {
           return CurvedNavigationBar(
-            onTap: (val) {
+            onTap: (val) async {
               bottom.bottomNavigateration(val);
               pageviewcontoller.animateToPage(val,
                   duration: Duration(milliseconds: 200),
                   curve: Curves.bounceInOut);
+              inAppWebViewController!.loadUrl(
+                  urlRequest:
+                      URLRequest(url: WebUri("https://www.google.com/")));
             },
             backgroundColor: Colors.grey,
             color: Color(0xFF1A1D24),
@@ -47,11 +52,11 @@ class _HomepageState extends State<Homepage> {
             items: [
               Icon(
                 Icons.home,
-                color: Color(0xffC70039),
+                color: Colors.white,
               ),
               Icon(
                 Icons.bookmark,
-                color: Color(0xffC70039),
+                color: Colors.white,
               ),
               GestureDetector(
                 onTap: () {
@@ -124,7 +129,7 @@ class _HomepageState extends State<Homepage> {
                 },
                 child: Icon(
                   Icons.screen_search_desktop_rounded,
-                  color: Color(0xffC70039),
+                  color: Colors.white,
                 ),
               ),
             ],

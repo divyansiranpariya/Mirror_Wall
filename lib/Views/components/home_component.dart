@@ -5,6 +5,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:mirror_wall/Views/components/searchengine_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../Provider/connectivity_provider.dart';
 import '../../utils/globaldata.dart';
 
 class Homecomponent extends StatefulWidget {
@@ -24,7 +25,7 @@ class _HomecomponentState extends State<Homecomponent> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    Provider.of<CheckedProvider>(context, listen: false).checkInternet();
     pullToRefreshController = PullToRefreshController(
         settings: PullToRefreshSettings(color: Colors.teal),
         onRefresh: () async {
@@ -94,56 +95,64 @@ class _HomecomponentState extends State<Homecomponent> {
           ],
         ),
         body: Center(
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              InAppWebView(
-                pullToRefreshController: pullToRefreshController,
-                initialUrlRequest: URLRequest(
-                  url: WebUri(
-                      "${Provider.of<Searcheneprovider>(context, listen: false).strMainURL}"),
-                ),
-                onWebViewCreated: (controller) {
-                  inAppWebViewController = controller;
-                },
-                onLoadStart: (controller, url) {
-                  inAppWebViewController = controller;
-                },
-                onLoadStop: (controller, url) async {
-                  await pullToRefreshController!.endRefreshing();
-                },
-              ),
-              Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 25, right: 25),
-                    height: 70,
-                    width: 305,
-                    decoration: BoxDecoration(
-                        color: Colors.white60,
-                        border: Border.all(color: Colors.black)),
-                    child: TextField(
-                      onSubmitted: (query) {
-                        String searchurl;
-                        if (Uri.tryParse(query)?.hasAbsolutePath ?? false) {
-                          searchurl = query;
-                        } else {
-                          searchurl = "https://www.google.com/search?q=$query";
-                        }
-                        inAppWebViewController?.loadUrl(
-                          urlRequest: URLRequest(url: WebUri(searchurl)),
-                        );
+          child: (Provider.of<CheckedProvider>(context).isInternet)
+              ? Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    InAppWebView(
+                      pullToRefreshController: pullToRefreshController,
+                      initialUrlRequest: URLRequest(
+                        url: WebUri(
+                            "${Provider.of<Searcheneprovider>(context, listen: false).strMainURL}"),
+                      ),
+                      onWebViewCreated: (controller) {
+                        inAppWebViewController = controller;
                       },
-                      controller: urlcontroller,
-                      decoration: InputDecoration(
-                          hintText: "Search or type web address",
-                          prefixIcon: Icon(Icons.search_sharp)),
+                      onLoadStart: (controller, url) {
+                        inAppWebViewController = controller;
+                      },
+                      onLoadStop: (controller, url) async {
+                        await pullToRefreshController!.endRefreshing();
+                      },
                     ),
-                  ),
-                ],
-              )
-            ],
-          ),
+                    Row(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(left: 25, right: 25),
+                          height: 70,
+                          width: 305,
+                          decoration: BoxDecoration(
+                              color: Colors.white60,
+                              border: Border.all(color: Colors.black)),
+                          child: TextField(
+                            onSubmitted: (query) {
+                              String searchurl;
+                              if (Uri.tryParse(query)?.hasAbsolutePath ??
+                                  false) {
+                                searchurl = query;
+                              } else {
+                                searchurl =
+                                    "https://www.google.com/search?q=$query";
+                              }
+                              inAppWebViewController?.loadUrl(
+                                urlRequest: URLRequest(url: WebUri(searchurl)),
+                              );
+                            },
+                            controller: urlcontroller,
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "Search or type web address",
+                                prefixIcon: Icon(Icons.search_sharp)),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                )
+              : Text(
+                  "No Internet",
+                  style: TextStyle(fontSize: 20),
+                ),
         ));
   }
 }

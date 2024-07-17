@@ -32,18 +32,28 @@ class _BookcomponentsState extends State<Bookcomponents> {
               return ListView.builder(
                   itemCount: Book.urldata.length,
                   itemBuilder: (context, index) {
-                    return Card(
-                      margin: EdgeInsets.only(left: 20, right: 20),
-                      child: ListTile(
-                        title: Text(Book.urldata[index]),
-                        trailing: IconButton(
-                          icon: Icon(Icons.delete),
-                          onPressed: () {
-                            delete.delete(index);
-                          },
-                        ),
-                      ),
-                    );
+                    return (Book.urldata.isEmpty)
+                        ? Text("Not Bookmarked data yet..")
+                        : Card(
+                            margin:
+                                EdgeInsets.only(left: 20, right: 20, top: 20),
+                            child: ListTile(
+                              onTap: () {
+                                Navigator.of(context).pushNamed('Bookmark',
+                                    arguments: Book.urldata[index]);
+                              },
+                              title: Text(
+                                Book.urldata[index],
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              trailing: IconButton(
+                                icon: Icon(Icons.delete),
+                                onPressed: () {
+                                  delete.delete(index);
+                                },
+                              ),
+                            ),
+                          );
                   });
             },
           ),
