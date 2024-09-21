@@ -26,7 +26,7 @@ This app uses the Provider package for state management.
 * provider
 * curved_navigation_bar
 
-=======
+
 
 This app uses the Provider package for state management.
 
@@ -40,15 +40,6 @@ This app uses the Provider package for state management.
 - **Pull to Refresh**: Pull down to refresh the current webpage.
 - **Connectivity Check**: Check and display internet connectivity status.
 - **Bookmark Management**: Save and delete bookmarks.
-
-## Dependencies
-
-* flutter
-* flutter_inappwebview
-* provider
-* curved_navigation_bar
-
-
 
 https://github.com/divyansiranpariya/Mirror_Wall/assets/154776848/35f97c4d-4562-49e7-b2a0-0da5092a489f
 
